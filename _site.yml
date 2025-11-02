@@ -1,6 +1,7 @@
 name: "my-personal-site"
 title: "Kristen Bashen - Portfolio"
 output_dir: "docs"
+
 navbar:
   title: "About"
   left:
@@ -10,6 +11,7 @@ navbar:
       href: analyses.html
     - text: "Contact"
       href: contact.html
+
 output:
   html_document:
     theme: flatly

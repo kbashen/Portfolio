@@ -11,21 +11,14 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 Each analysis is an `.Rmd` that you knit to `.html`. After knitting, link to it from here.
 
-## Featured: Assignment 1
+## Featured: Assignment 1 
 
-**Title:** Fuel economy vs. engine size (example)  
-**File:** `assignment-1.Rmd` → `assignment-1.html`
+**Title:** Boulder Social Media Photo Locations (Flickr)  
+**File:** `648lab01analysis.Rmd` → `648lab01analysis.html`
 
-- **Open the analysis:** [assignment-1.html](assignment-1.html)
-- **What it shows:** a quick plot, a small regression, and short reflections.
-- **Skills:** R Markdown, ggplot2, linear models.
+- **Open the analysis:** * [Lab 01 Analysis](648lab01analysis.html) — Boulder Social Media Photo Locations (Flickr)
+- **What it shows:** A spatial visualization of Flickr photo locations across Boulder, highlighting clusters of social media activity and patterns of engagement in urban versus rural areas. 
+- **Skills:** Spatial data visualization, mapping with ggplot2 and sf, and interpretation of point pattern distributions.
 
 ---
 
-## Add more analyses
-
-1. Copy `template-analysis.Rmd` to a new filename (e.g., `my-analysis.Rmd`).  
-2. Knit to generate `my-analysis.html`.  
-3. Add a bullet/link here:
-
-- _Example placeholder_: [my-analysis.html](my-analysis.html) — short description.

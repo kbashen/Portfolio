@@ -1,0 +1,119 @@
+---
+title: "EAS 648 Assignment 1"
+author: "Kristen Bashen"
+date: "2025-10-29"
+output:
+  html_document:
+    self_contained: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r packages and data}
+
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(ggspatial)
+
+
+boulder <- st_read("~/Downloads/BoulderSocialMedia/BoulderSocialMedia.shp")
+
+# View structure
+
+boulder
+
+```
+
+## Exploring data
+
+
+```{r}
+
+# See variable names and data types
+
+names(boulder)
+summary(boulder)
+
+```
+```{r Basic Summary and Visualization}
+
+#Number of posts per source
+boulder %>%
+st_drop_geometry() %>%
+count(DB, sort = TRUE) %>%
+ggplot(aes(x = reorder(DB, n), y = n, fill = DB)) +
+geom_col(show.legend = FALSE) +
+coord_flip() +
+labs(title = "Posts by Source Platform",
+x = "Source",
+y = "Number of Posts") +
+theme_minimal()
+
+
+#Histogram of distance to trails
+
+boulder %>%
+st_drop_geometry() %>%
+ggplot(aes(x = Trails_dis)) +
+geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+labs(title = "Distribution of Distance to Nearest Trail",
+x = "Distance to Trail (m)",
+y = "Count of Photo Points") +
+theme_minimal()
+
+
+```
+```{r Geovisualization (map)}
+
+ggplot() +
+  # points only, no fill, no mapping to DB
+  geom_sf(data = boulder, color = "#1f77b4", size = 0.35, alpha = 0.35) +
+
+  annotation_scale(location = "bl", width_hint = 0.4) +
+  annotation_north_arrow(location = "tr", which_north = "true",
+                         pad_x = unit(0.3, "in"), pad_y = unit(0.3, "in"),
+                         style = north_arrow_fancy_orienteering) +
+  labs(title = "Boulder Social Media Photo Locations (Flickr)",
+       subtitle = "Points only — no polygon fill",
+       caption = "Data: Boulder Social Media Shapefile") +
+  theme_minimal()
+
+
+
+```
+
+```{r Making Points Smaller}
+
+ggplot() +
+  geom_sf(data = boulder, color = "#1f77b4", size = 0.1, alpha = 0.1) +
+  annotation_scale(location = "bl") +
+  annotation_north_arrow(location = "tr") +
+  labs(title = "Boulder Social Media Photo Locations (Flickr)",
+       subtitle = "Showing individual Flickr points",
+       caption = "Data: Boulder Social Media Shapefile 
+       by Kristen Bashen") +
+  theme_minimal()
+
+
+```
+
+### Interpretation
+
+This map visualizes Flickr photo locations across Boulder, CO, based on geotagged social media data. Each blue point represents a photo uploaded to Flickr, offering insight into where people most frequently take and share images.
+
+The highest density of points appears along western Boulder, near the foothills and open space preserves, including trail heads, parks, and mountain access areas. This suggests that outdoor recreation and scenic landscapes are the primary drivers of social media activity in this dataset.
+
+In contrast, central and eastern Boulder show fewer photo points, reflecting more residential, industrial, or less scenic environments where fewer photos are publicly shared.
+
+Overall, this spatial pattern highlights that Flickr users in Boulder tend to capture and share images in natural and recreational settings, aligning with the region’s strong outdoor culture and the popularity of the Rocky Mountain front range for hiking and sightseeing.
+
+
