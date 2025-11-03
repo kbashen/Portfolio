@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Kristen Bashen" />
+
+<meta name="date" content="2025-10-29" />
+
+<title>EAS 648 Assignment 1</title>
+
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">About</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">About</a>
+</li>
+<li>
+  <a href="analyses.html">Analyses</a>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">EAS 648 Assignment 1</h1>
+<h4 class="author">Kristen Bashen</h4>
+<h4 class="date">2025-10-29</h4>
+
+</div>
+
+
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting
+syntax for authoring HTML, PDF, and MS Word documents. For more details
+on using R Markdown see <a href="http://rmarkdown.rstudio.com"
+class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be
+generated that includes both content as well as the output of any
+embedded R code chunks within the document. You can embed an R code
+chunk like this:</p>
+<pre class="r"><code>library(sf)</code></pre>
+<pre><code>## Linking to GEOS 3.13.0, GDAL 3.8.5, PROJ 9.5.1; sf_use_s2() is TRUE</code></pre>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(ggplot2)
+library(ggspatial)
+
+
+boulder &lt;- st_read(&quot;~/Downloads/BoulderSocialMedia/BoulderSocialMedia.shp&quot;)</code></pre>
+<pre><code>## Reading layer `BoulderSocialMedia&#39; from data source 
+##   `/Users/kristenbashen/Downloads/BoulderSocialMedia/BoulderSocialMedia.shp&#39; 
+##   using driver `ESRI Shapefile&#39;
+## Simple feature collection with 55519 features and 12 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -788775 ymin: 1917813 xmax: -780555 ymax: 1930053
+## Projected CRS: NAD_1983_Albers</code></pre>
+<pre class="r"><code># View structure
+
+boulder</code></pre>
+<pre><code>## Simple feature collection with 55519 features and 12 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -788775 ymin: 1917813 xmax: -780555 ymax: 1930053
+## Projected CRS: NAD_1983_Albers
+## First 10 features:
+##            id     DB   extent Climb_dist TrailH_Dis NatMrk_Dis Trails_dis
+## 1  6517284333 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 2  6517281191 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 3  6517278961 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 4  6517276295 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 5  6517274727 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 6  6517272539 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 7  6517270109 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 8  6516904527 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 9  6516902971 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+## 10 6516900761 Flickr 421678.2   1973.108   2368.567   2451.633   49.73422
+##    Bike_dis PrarDg_Dis PT_Elev Hydro_dis Street_dis                geometry
+## 1  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 2  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 3  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 4  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 5  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 6  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 7  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 8  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 9  1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)
+## 10 1437.134   1942.125    2064   1359.75   193.9165 POINT (-786099 1929916)</code></pre>
+</div>
+<div id="exploring-data" class="section level2">
+<h2>Exploring data</h2>
+<pre class="r"><code># See variable names and data types
+
+names(boulder)</code></pre>
+<pre><code>##  [1] &quot;id&quot;         &quot;DB&quot;         &quot;extent&quot;     &quot;Climb_dist&quot; &quot;TrailH_Dis&quot;
+##  [6] &quot;NatMrk_Dis&quot; &quot;Trails_dis&quot; &quot;Bike_dis&quot;   &quot;PrarDg_Dis&quot; &quot;PT_Elev&quot;   
+## [11] &quot;Hydro_dis&quot;  &quot;Street_dis&quot; &quot;geometry&quot;</code></pre>
+<pre class="r"><code>summary(boulder)</code></pre>
+<pre><code>##        id                 DB                extent           Climb_dist       
+##  Min.   :2.087e+04   Length:55519       Min.   :       0   Min.   :   0.4421  
+##  1st Qu.:9.624e+04   Class :character   1st Qu.: 2687412   1st Qu.: 199.4312  
+##  Median :1.182e+05   Mode  :character   Median : 7156841   Median : 538.8955  
+##  Mean   :1.569e+09                      Mean   : 8703717   Mean   : 739.2363  
+##  3rd Qu.:1.380e+05                      3rd Qu.:13199247   3rd Qu.:1102.7908  
+##  Max.   :4.043e+10                      Max.   :39608082   Max.   :3022.4913  
+##    TrailH_Dis         NatMrk_Dis       Trails_dis           Bike_dis       
+##  Min.   :   2.721   Min.   :   0.0   Min.   :6.500e-04   Min.   :   0.033  
+##  1st Qu.: 686.575   1st Qu.: 492.2   1st Qu.:4.427e+01   1st Qu.: 744.937  
+##  Median :1298.314   Median : 990.0   Median :1.363e+02   Median :1641.085  
+##  Mean   :1507.691   Mean   :1041.2   Mean   :2.334e+02   Mean   :1917.648  
+##  3rd Qu.:2117.532   3rd Qu.:1578.5   3rd Qu.:3.148e+02   3rd Qu.:2928.094  
+##  Max.   :4815.947   Max.   :3104.9   Max.   :1.816e+03   Max.   :5871.519  
+##    PrarDg_Dis      PT_Elev       Hydro_dis      Street_dis       
+##  Min.   :   0   Min.   :1644   Min.   :   0   Min.   :   0.0136  
+##  1st Qu.:1749   1st Qu.:1794   1st Qu.:1186   1st Qu.: 169.8457  
+##  Median :2859   Median :1947   Median :1782   Median : 412.9053  
+##  Mean   :2808   Mean   :1985   Mean   :1800   Mean   : 564.5936  
+##  3rd Qu.:3910   3rd Qu.:2178   3rd Qu.:2449   3rd Qu.: 854.6350  
+##  Max.   :6052   Max.   :2604   Max.   :3588   Max.   :2230.2387  
+##           geometry    
+##  POINT        :55519  
+##  epsg:NA      :    0  
+##  +proj=aea ...:    0  
+##                       
+##                       
+## </code></pre>
+<pre class="r"><code>#Number of posts per source
+boulder %&gt;%
+st_drop_geometry() %&gt;%
+count(DB, sort = TRUE) %&gt;%
+ggplot(aes(x = reorder(DB, n), y = n, fill = DB)) +
+geom_col(show.legend = FALSE) +
+coord_flip() +
+labs(title = &quot;Posts by Source Platform&quot;,
+x = &quot;Source&quot;,
+y = &quot;Number of Posts&quot;) +
+theme_minimal()</code></pre>
+<p><img src="648lab01analysis_files/figure-html/Basic%20Summary%20and%20Visualization-1.png" width="672" /></p>
+<pre class="r"><code>#Histogram of distance to trails
+
+boulder %&gt;%
+st_drop_geometry() %&gt;%
+ggplot(aes(x = Trails_dis)) +
+geom_histogram(bins = 30, fill = &quot;steelblue&quot;, color = &quot;white&quot;) +
+labs(title = &quot;Distribution of Distance to Nearest Trail&quot;,
+x = &quot;Distance to Trail (m)&quot;,
+y = &quot;Count of Photo Points&quot;) +
+theme_minimal()</code></pre>
+<p><img src="648lab01analysis_files/figure-html/Basic%20Summary%20and%20Visualization-2.png" width="672" /></p>
+<pre class="r"><code>ggplot() +
+  # points only, no fill, no mapping to DB
+  geom_sf(data = boulder, color = &quot;#1f77b4&quot;, size = 0.35, alpha = 0.35) +
+
+  annotation_scale(location = &quot;bl&quot;, width_hint = 0.4) +
+  annotation_north_arrow(location = &quot;tr&quot;, which_north = &quot;true&quot;,
+                         pad_x = unit(0.3, &quot;in&quot;), pad_y = unit(0.3, &quot;in&quot;),
+                         style = north_arrow_fancy_orienteering) +
+  labs(title = &quot;Boulder Social Media Photo Locations (Flickr)&quot;,
+       subtitle = &quot;Points only — no polygon fill&quot;,
+       caption = &quot;Data: Boulder Social Media Shapefile&quot;) +
+  theme_minimal()</code></pre>
+<p><img src="648lab01analysis_files/figure-html/Geovisualization%20(map)-1.png" width="672" /></p>
+<pre class="r"><code>ggplot() +
+  geom_sf(data = boulder, color = &quot;#1f77b4&quot;, size = 0.1, alpha = 0.1) +
+  annotation_scale(location = &quot;bl&quot;) +
+  annotation_north_arrow(location = &quot;tr&quot;) +
+  labs(title = &quot;Boulder Social Media Photo Locations (Flickr)&quot;,
+       subtitle = &quot;Showing individual Flickr points&quot;,
+       caption = &quot;Data: Boulder Social Media Shapefile 
+       by Kristen Bashen&quot;) +
+  theme_minimal()</code></pre>
+<p><img src="648lab01analysis_files/figure-html/Making%20Points%20Smaller-1.png" width="672" /></p>
+<div id="interpretation" class="section level3">
+<h3>Interpretation</h3>
+<p>This map visualizes Flickr photo locations across Boulder, CO, based
+on geotagged social media data. Each blue point represents a photo
+uploaded to Flickr, offering insight into where people most frequently
+take and share images.</p>
+<p>The highest density of points appears along western Boulder, near the
+foothills and open space preserves, including trail heads, parks, and
+mountain access areas. This suggests that outdoor recreation and scenic
+landscapes are the primary drivers of social media activity in this
+dataset.</p>
+<p>In contrast, central and eastern Boulder show fewer photo points,
+reflecting more residential, industrial, or less scenic environments
+where fewer photos are publicly shared.</p>
+<p>Overall, this spatial pattern highlights that Flickr users in Boulder
+tend to capture and share images in natural and recreational settings,
+aligning with the region’s strong outdoor culture and the popularity of
+the Rocky Mountain front range for hiking and sightseeing.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
